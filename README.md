@@ -7,7 +7,7 @@
 ### **Задача**
 - - -
 
-- **Вход:** `train.csv`, `test.csv` (по одной строке на `cookie_id`), `events.csv.gz` $-$ история событий куки.
+- **Вход:** `train.csv`, `test.csv` (по одной строке на `cookie_id`), `events.csv` $-$ история событий куки.
 
 - **Выход:** `submission.csv` с колонками `cookie_id`, `score`.
 
