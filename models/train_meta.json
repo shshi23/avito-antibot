@@ -1,0 +1,16 @@
+{
+  "random_state": 42,
+  "catboost_params": {
+    "iterations": 700,
+    "depth": 6,
+    "learning_rate": 0.05,
+    "l2_leaf_reg": 3.0,
+    "loss_function": "Logloss",
+    "auto_class_weights": "Balanced",
+    "random_seed": 42,
+    "verbose": false,
+    "allow_writing_files": false
+  },
+  "n_features": 61,
+  "n_train_rows": 11091
+}
