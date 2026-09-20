@@ -17,7 +17,7 @@ def build_features(
     verbose: bool = False,
 ) -> pd.DataFrame:
     """
-    Собирает таблицу признаков: одна строка = одна cookie_id.
+    Собирает таблицу базовых признаков
 
     Параметры
     ---------
@@ -62,7 +62,6 @@ def build_features(
     base = base.merge(_pointer_features(events_window), on="cookie_id", how="left")
     base = base.merge(_event_type_features(events_window), on="cookie_id", how="left")
 
-    # target подтягиваем в самом конце
     if with_target and "target" in cookies.columns:
         base = base.merge(
             cookies[["cookie_id", "target"]], on="cookie_id", how="left"
@@ -75,7 +74,7 @@ def build_features(
     return base
 
 def _prepare_events(events: pd.DataFrame) -> pd.DataFrame:
-    """Приводит типы и создаёт служебные колонки один раз."""
+    """Приводит типы и создаёт служебные колонки"""
     events = events.copy()
     events["event_ts"] = pd.to_datetime(events["event_ts"])
     events["platform_clean"] = (
@@ -91,7 +90,7 @@ def _prepare_events(events: pd.DataFrame) -> pd.DataFrame:
 def _filter_events_by_window(
     events: pd.DataFrame, cookies: pd.DataFrame
 ) -> pd.DataFrame:
-    """Оставляет только события, попавшие в окно наблюдения куки."""
+    """Оставляет только события, попавшие в окно наблюдения куки"""
     cols = ["cookie_id", "window_start_ts", "window_end_ts"]
     merged = events.merge(cookies[cols], on="cookie_id", how="inner")
 
@@ -315,3 +314,4 @@ def _event_type_features(events: pd.DataFrame) -> pd.DataFrame:
     feats = ratios.merge(flags, on="cookie_id", how="left")
     feats = feats.merge(ratio, on="cookie_id", how="left")
     return feats
+
